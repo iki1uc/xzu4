@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>XZU4 Bench Viewer</title>
+<title>XZU4 System Position</title>
 <style>
     body { background:#111; color:#eee; font-family: monospace; padding:20px; }
     .block { margin-bottom:20px; padding:10px; border:1px solid #444; }
@@ -11,25 +11,58 @@
 </head>
 <body>
 
-<h2>XZU4 Bench Viewer</h2>
+<h2>XZU4 — System Position Viewer</h2>
 
 <div class="block">
     <h3>Input</h3>
-    <input id="benchInput" placeholder="type raw input...">
+    <input id="pos12" placeholder="pos12 (0–11)">
+    <input id="pos4" placeholder="pos4 (0–3)" style="margin-top:5px;">
+    <input id="vpos" placeholder="vpos (0–3)" style="margin-top:5px;">
 </div>
 
 <div class="block">
     <h3>Output</h3>
-    <textarea id="benchOutput" rows="6" readonly></textarea>
+    <textarea id="out" rows="10" readonly></textarea>
 </div>
 
 <script>
-document.getElementById("benchInput").addEventListener("input", function() {
-    let v = this.value;
-    document.getElementById("benchOutput").value = v;
-});
+function update() {
+    const p12 = parseInt(document.getElementById("pos12").value);
+    const p4  = parseInt(document.getElementById("pos4").value);
+    const vp  = parseInt(document.getElementById("vpos").value);
+
+    if (isNaN(p12) || isNaN(p4) || isNaN(vp)) {
+        document.getElementById("out").value = "invalid";
+        return;
+    }
+
+    const next12 = (p12 + 1) % 12;
+    const prev12 = (p12 + 11) % 12;
+
+    const next4 = (p4 + 1) % 4;
+    const prev4 = (p4 + 3) % 4;
+
+    const nextV = (vp + 1) % 4;
+    const prevV = (vp + 3) % 4;
+
+    document.getElementById("out").value =
+`pos12=${p12}
+next12=${next12}
+prev12=${prev12}
+
+pos4=${p4}
+next4=${next4}
+prev4=${prev4}
+
+vpos=${vp}
+nextV=${nextV}
+prevV=${prevV}`;
+}
+
+document.getElementById("pos12").addEventListener("input", update);
+document.getElementById("pos4").addEventListener("input", update);
+document.getElementById("vpos").addEventListener("input", update);
 </script>
 
 </body>
 </html>
-
