@@ -1,24 +1,34 @@
-# XZU4 — RAW Bench Material
+# System Position (RAW)
 
-XZU4 ist ein neutraler Bench-Respo.  
-Er enthält Stationen, Items und Operator-Material für einfache RAW-Tests.
+Dieses Modul liefert neutrale Positionsdaten für das System.
+Keine Logik. Keine Engine. Keine Interpretation.
 
-## Inhalt
-/items  
-- station-01.bench.item  
-- station-02.bench.item  
-- xzu4-bench-plan.item  
-- xzu4-operator.item  
+## Position
+- pos12: 0–11        (12‑Raum)
+- pos4: 0–3          (4‑Achsen‑Band)
+- vpos: 0–3          (virtuelle Achse)
+
+## Nähe
+- next12: (pos12+1)%12
+- prev12: (pos12+11)%12
+- next4:  (pos4+1)%4
+- prev4:  (pos4+3)%4
+- nextV:  (vpos+1)%4
+- prevV:  (vpos+3)%4
 
 ## Zweck
-XZU4 dient als Behälter für Bench-Dateien.  
-Keine Logik, keine Engine, keine Interpretation.  
-Nur RAW-Material für Tests und Verhalten.
+Diese Werte dienen ausschließlich der Orientierung für andere Module
+(OS, CALC, LIVE, NC, Operatoren).
+
+## Verhalten
+Dieses Modul führt keine Logik aus.
+Es bewegt nichts.
+Es entscheidet nichts.
+Es interpretiert nichts.
 
 ## Nutzung
-Die Dateien können direkt in Bench-Viewer wie DINOly geladen werden.  
-Jede Station arbeitet unabhängig.
+Die Positionswerte können direkt ausgelesen und weiterverarbeitet werden.
+Alle Achsen (12‑Raum, 4‑Band, virtuelle Achse) bleiben stabil und neutral.
 
 ## Status
-XZU4 ist ein reiner Material-Respo.
-
+RAW‑Material. Schnittstellen‑fähig. EVO‑kompatibel.
